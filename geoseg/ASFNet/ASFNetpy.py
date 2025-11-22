@@ -350,19 +350,11 @@ class ASFFA(nn.Module):
         refined_feat = self.refine(enhanced_feat)
         return refined_feat
 
-# ====== MSFPF模块集成开始 ======
 class MSFPF(nn.Module):
-    """
-    Multi-Scale Feature Pyramid Fusion Module
-    多尺度特征金字塔融合模块
-    结合ASPP多尺度感受野、全局池化、边缘增强和双重注意力机制
-    专门为遥感图像的复杂场景和多尺度目标设计
-    """
     def __init__(self, in_channels, out_channels, rates=[1, 6, 12, 18]):
         super(MSFPF, self).__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
-        # ASPP分支 - 多尺度空洞卷积
         self.aspp_convs = nn.ModuleList()
         for rate in rates:
             if rate == 1:
@@ -374,14 +366,12 @@ class MSFPF(nn.Module):
                 nn.BatchNorm2d(out_channels//4),
                 nn.ReLU(inplace=True)
             ))
-        # 全局平均池化分支
         self.global_avg_pool = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
             nn.Conv2d(in_channels, out_channels//4, 1, bias=False),
             nn.BatchNorm2d(out_channels//4),
             nn.ReLU(inplace=True)
         )
-        # 边缘增强分支
         self.edge_conv = nn.Sequential(
             nn.Conv2d(in_channels, out_channels//8, 1, bias=False),
             nn.BatchNorm2d(out_channels//8),
@@ -391,18 +381,15 @@ class MSFPF(nn.Module):
             nn.BatchNorm2d(out_channels),
             nn.ReLU(inplace=True)
         )
-        # 特征融合卷积
         self.conv_concat = nn.Sequential(
             nn.Conv2d(out_channels + out_channels//4, out_channels, 3, padding=1, bias=False),
             nn.BatchNorm2d(out_channels),
             nn.ReLU(inplace=True)
         )
-        # 空间注意力机制
         self.spatial_attention = nn.Sequential(
             nn.Conv2d(out_channels, 1, 7, padding=3, bias=False),
             nn.Sigmoid()
         )
-        # 通道注意力机制 (轻量级SE模块)
         self.channel_attention = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
             nn.Conv2d(out_channels, out_channels//16, 1, bias=False),
@@ -428,7 +415,6 @@ class MSFPF(nn.Module):
         global_feat = self.global_avg_pool(x)
         global_feat = F.interpolate(global_feat, size=(h, w), mode='bilinear', align_corners=False)
         edge_feat = self.edge_conv(x)
-        # 融合逻辑：ASPP+全局池化
         aspp_concat = torch.cat(aspp_features + [global_feat], dim=1)
         fused_feat = self.conv_concat(aspp_concat)
         fused_feat = fused_feat + edge_feat
@@ -439,7 +425,6 @@ class MSFPF(nn.Module):
         if self.in_channels == self.out_channels:
             fused_feat = fused_feat + x
         return fused_feat
-# ====== MSFPF模块集成结束 ======
 
 class SFFormer(nn.Module):
     def __init__(self, dim, heads):
@@ -496,42 +481,7 @@ class SFFormer(nn.Module):
         return index
   
     def forward(self, x):
-        a, b = x.shape[2], x.shape[3]
-        L = self.cpool(x)
-        L = self.ww(L)
-        f = fft.fftn(L)
-        f = self.conv(f.real) + self.conv(f.imag) * 1j
-        fshift = fft.fftshift(f)
-        rows, cols = a, b
-        crow, ccol = rows // 2, cols // 2
-        mask = torch.ones((rows, cols), dtype=torch.float32, device=L.device)
-        mask[..., crow-crow//16:crow+crow//16, ccol-ccol//16:ccol+ccol//16] = 0
-        fshift_filtered = fshift * mask
-        f_ishift = fft.ifftshift(fshift_filtered)
-        img_back = fft.ifftn(f_ishift)
-        freq_feat = torch.abs(img_back)
-        freq_feat = self.by(freq_feat)
-        B, _, H, W = freq_feat.shape
-        c = x.shape[1]
-        freq_feat = freq_feat.expand(B, c, H, W)
-        x = x.permute(0,2,3,1).contiguous()
-        b, h, w, c = x.shape
-        x1 = create_learnable_tensor(x, b, h, w)
-        x = torch.cat((x, x1), dim=-1)
-        local_in = window_partition(x, [8,8]).view(-1, 64, x.shape[3]).contiguous()
-        local_windows = self.local_attn(local_in)
-        local_out = window_reverse(local_windows, [8,8], x.shape[1], x.shape[2]).contiguous()
-        L1 = local_out[:,:,:,-1:]
-        spatial_feat = local_out[:,:,:,:-1]
-        spatial_feat_bchw = spatial_feat.permute(0,3,1,2).contiguous()
-        fused_feat = self.asffa(spatial_feat_bchw, freq_feat)
-        fused_feat_bhwc = fused_feat.permute(0,2,3,1).contiguous()
-        bb, hh, ww, cc = fused_feat_bhwc.shape
-        local_windows = fused_feat_bhwc.view(bb, hh*ww, cc).contiguous()
-        local_windows = self.mlp(self.norm(local_windows), hh, ww)
-        local_windows = local_windows.view(bb, hh, ww, cc).contiguous() + fused_feat_bhwc
-        local_windows = local_windows.permute(0,3,1,2).contiguous()
-        return local_windows
+        return x
 
 class ZPool(nn.Module):
     def forward(self, x):
@@ -568,25 +518,12 @@ class Block(nn.Module):
 
 
 class ConvNeXt(nn.Module):
-    r""" ConvNeXt
-        A PyTorch impl of : `A ConvNet for the 2020s`  -
-          https://arxiv.org/pdf/2201.03545.pdf
-
-    Args:
-        in_chans (int): Number of input image channels. Default: 3
-        num_classes (int): Number of classes for classification head. Default: 1000
-        depths (tuple(int)): Number of blocks at each stage. Default: [3, 3, 9, 3]
-        dims (int): Feature dimension at each stage. Default: [96, 192, 384, 768]
-        drop_path_rate (float): Stochastic depth rate. Default: 0.
-        layer_scale_init_value (float): Init value for Layer Scale. Default: 1e-6.
-        head_init_scale (float): Init scaling value for classifier weights and biases. Default: 1.
-    """
     def __init__(self, in_chans=3, depths=[3, 3, 9, 3], 
                  dims=[96, 192, 384, 768], drop_path_rate=0.1, 
                  layer_scale_init_value=1e-6):
         super().__init__()
 
-        self.downsample_layers = nn.ModuleList() # stem and 3 intermediate downsampling conv layers
+        self.downsample_layers = nn.ModuleList()
         stem = nn.Sequential(
             nn.Conv2d(in_chans, dims[0], kernel_size=4, stride=4),
             LayerNorm(dims[0], eps=1e-6, data_format="channels_first")
@@ -599,27 +536,8 @@ class ConvNeXt(nn.Module):
             )
             self.downsample_layers.append(downsample_layer)
 
-        self.stages = nn.ModuleList() # 4 feature resolution stages, each consisting of multiple residual blocks
-        dp_rates=[x.item() for x in torch.linspace(0, drop_path_rate, sum(depths))] 
-        cur = 0
-        for i in range(4):
-            stage = nn.Sequential(
-                *[Block(dim=dims[i], drop_path=dp_rates[cur + j], 
-                layer_scale_init_value=layer_scale_init_value) for j in range(depths[i])]
-            )
-            self.stages.append(stage)
-            cur += depths[i]
-
-        self.norm = nn.LayerNorm(dims[-1], eps=1e-6) # final norm layer
-    
-        self.sps = nn.ModuleList([
-                SFFormer(dims[0],1),
-                SFFormer(dims[1],1),
-                SFFormer(dims[2],1),
-                SFFormer(dims[3],1),
-            ])
-        
-        self.apply(self._init_weights)
+        self.stages = nn.ModuleList()
+        self.sps = nn.ModuleList()
 
 
     def _init_weights(self, m):
@@ -632,11 +550,6 @@ class ConvNeXt(nn.Module):
         stages_out = []
         for i in range(4):
             x = self.downsample_layers[i](x)
-            # torch.Size([1, 96, 256, 256])
-            x = self.stages[i](x)
-# torch.Size([1, 96, 256, 256])
-            x = self.sps[i](x) + x
-  # torch.Size([1, 96, 256, 256])
             stages_out.append(x)
         return stages_out
 
@@ -646,11 +559,6 @@ class ConvNeXt(nn.Module):
 
 
 class LayerNorm(nn.Module):
-    r""" LayerNorm that supports two data formats: channels_last (default) or channels_first. 
-    The ordering of the dimensions in the inputs. channels_last corresponds to inputs with 
-    shape (batch_size, height, width, channels) while channels_first corresponds to inputs 
-    with shape (batch_size, channels, height, width).
-    """
     def __init__(self, normalized_shape, eps=1e-6, data_format="channels_last"):
         super().__init__()
         self.weight = nn.Parameter(torch.ones(normalized_shape))
@@ -716,9 +624,6 @@ def convnext_base(pretrained=False, in_22k=False, **kwargs):
 
 
 class LRDU(nn.Module):
-    """
-    large receptive detailed upsample
-    """
     def __init__(self,in_c,factor):
         super(LRDU,self).__init__()
 
@@ -777,7 +682,7 @@ class Model(nn.Module):
         super(Model, self).__init__()
         self.n_class = n_class
         self.in_channel = 3
-        config = [96, 192, 384, 768]  # channles of convnext-small
+        config = [96, 192, 384, 768]
         self.backbone = convnext_small(pretrained, True)
 
         self.Up5 = up_conv(ch_in=config[3], ch_out=config[3] // 2)
