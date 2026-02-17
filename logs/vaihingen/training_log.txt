@@ -1,0 +1,443 @@
+================================================================================
+ASFNet Training Log - Vaihingen Dataset
+================================================================================
+
+Training Configuration:
+--------------------------------------------------------------------------------
+  Model: ASFNet (ASFFA + MSFPF + LRDU)
+  Dataset: Vaihingen
+  Batch Size: 4
+  Total Epochs: 100
+  Learning Rate: 6e-4 (base), 6e-5 (backbone)
+  Optimizer: AdamW + Lookahead
+  Scheduler: CosineAnnealingWarmRestarts
+  Loss Function: Joint Loss (Dice + Cross Entropy)
+  Input Size: 512×512
+--------------------------------------------------------------------------------
+
+Training Progress:
+================================================================================
+
+Epoch   0/100
+  Train - mIoU: 0.4452, F1: 0.5671, OA: 0.7123
+  Val   - mIoU: 0.5924, F1: 0.8469, OA: 0.8701
+
+Epoch   1/100
+  Train - mIoU: 0.5584, F1: 0.6567, OA: 0.8224
+  Val   - mIoU: 0.6824, F1: 0.7779, OA: 0.9010
+
+Epoch   2/100
+  Train - mIoU: 0.6629, F1: 0.7853, OA: 0.8475
+  Val   - mIoU: 0.7748, F1: 0.8666, OA: 0.9181
+
+Epoch   3/100
+  Train - mIoU: 0.6920, F1: 0.8097, OA: 0.8587
+  Val   - mIoU: 0.7844, F1: 0.8733, OA: 0.9222
+
+Epoch   4/100
+  Train - mIoU: 0.7155, F1: 0.8274, OA: 0.8712
+  Val   - mIoU: 0.8125, F1: 0.8936, OA: 0.9255
+
+Epoch   5/100
+  Train - mIoU: 0.7300, F1: 0.8388, OA: 0.8748
+  Val   - mIoU: 0.8210, F1: 0.8992, OA: 0.9286
+
+Epoch   6/100
+  Train - mIoU: 0.7391, F1: 0.8447, OA: 0.8821
+  Val   - mIoU: 0.8141, F1: 0.8947, OA: 0.9262
+
+Epoch   7/100
+  Train - mIoU: 0.7537, F1: 0.8550, OA: 0.8893
+  Val   - mIoU: 0.8262, F1: 0.9025, OA: 0.9285
+
+Epoch   8/100
+  Train - mIoU: 0.7581, F1: 0.8582, OA: 0.8906
+  Val   - mIoU: 0.8278, F1: 0.9034, OA: 0.9290
+
+Epoch   9/100
+  Train - mIoU: 0.7663, F1: 0.8638, OA: 0.8932
+  Val   - mIoU: 0.8319, F1: 0.9061, OA: 0.9308
+
+Epoch  10/100
+  Train - mIoU: 0.7670, F1: 0.8643, OA: 0.8936
+  Val   - mIoU: 0.8356, F1: 0.9083, OA: 0.9333
+
+Epoch  11/100
+  Train - mIoU: 0.7721, F1: 0.8678, OA: 0.8968
+  Val   - mIoU: 0.8327, F1: 0.9065, OA: 0.9324
+
+Epoch  12/100
+  Train - mIoU: 0.7751, F1: 0.8698, OA: 0.8981
+  Val   - mIoU: 0.8353, F1: 0.9081, OA: 0.9335
+
+Epoch  13/100
+  Train - mIoU: 0.7792, F1: 0.8725, OA: 0.9000
+  Val   - mIoU: 0.8354, F1: 0.9081, OA: 0.9330
+
+Epoch  14/100
+  Train - mIoU: 0.7775, F1: 0.8715, OA: 0.8983
+  Val   - mIoU: 0.8353, F1: 0.9081, OA: 0.9334
+
+Epoch  15/100
+  Train - mIoU: 0.7580, F1: 0.8581, OA: 0.8906
+  Val   - mIoU: 0.8351, F1: 0.9080, OA: 0.9333
+
+Epoch  16/100
+  Train - mIoU: 0.7703, F1: 0.8666, OA: 0.8945
+  Val   - mIoU: 0.8275, F1: 0.9033, OA: 0.9290
+
+Epoch  17/100
+  Train - mIoU: 0.7795, F1: 0.8728, OA: 0.8992
+  Val   - mIoU: 0.8250, F1: 0.9014, OA: 0.9254
+
+Epoch  18/100
+  Train - mIoU: 0.7799, F1: 0.8732, OA: 0.9003
+  Val   - mIoU: 0.8222, F1: 0.9002, OA: 0.9234
+
+Epoch  19/100
+  Train - mIoU: 0.7880, F1: 0.8785, OA: 0.9025
+  Val   - mIoU: 0.8202, F1: 0.8982, OA: 0.9305
+
+Epoch  20/100
+  Train - mIoU: 0.7964, F1: 0.8841, OA: 0.9067
+  Val   - mIoU: 0.8418, F1: 0.9121, OA: 0.9350
+
+Epoch  21/100
+  Train - mIoU: 0.7935, F1: 0.8820, OA: 0.9062
+  Val   - mIoU: 0.8360, F1: 0.9083, OA: 0.9328
+
+Epoch  22/100
+  Train - mIoU: 0.7984, F1: 0.8853, OA: 0.9089
+  Val   - mIoU: 0.8407, F1: 0.9113, OA: 0.9348
+
+Epoch  23/100
+  Train - mIoU: 0.8019, F1: 0.8876, OA: 0.9098
+  Val   - mIoU: 0.8399, F1: 0.9109, OA: 0.9344
+
+Epoch  24/100
+  Train - mIoU: 0.8025, F1: 0.8879, OA: 0.9110
+  Val   - mIoU: 0.8280, F1: 0.9031, OA: 0.9275
+  >>> Checkpoint saved at epoch 24
+
+Epoch  25/100
+  Train - mIoU: 0.8091, F1: 0.8922, OA: 0.9137
+  Val   - mIoU: 0.8417, F1: 0.9119, OA: 0.9346
+
+Epoch  26/100
+  Train - mIoU: 0.8165, F1: 0.8969, OA: 0.9177
+  Val   - mIoU: 0.8403, F1: 0.9111, OA: 0.9338
+
+Epoch  27/100
+  Train - mIoU: 0.8176, F1: 0.8976, OA: 0.9184
+  Val   - mIoU: 0.8378, F1: 0.9095, OA: 0.9332
+
+Epoch  28/100
+  Train - mIoU: 0.8171, F1: 0.8973, OA: 0.9167
+  Val   - mIoU: 0.8357, F1: 0.9080, OA: 0.9311
+
+Epoch  29/100
+  Train - mIoU: 0.8220, F1: 0.9004, OA: 0.9203
+  Val   - mIoU: 0.8424, F1: 0.9124, OA: 0.9350
+
+Epoch  30/100
+  Train - mIoU: 0.8247, F1: 0.9020, OA: 0.9221
+  Val   - mIoU: 0.8427, F1: 0.9126, OA: 0.9349
+
+Epoch  31/100
+  Train - mIoU: 0.8288, F1: 0.9045, OA: 0.9233
+  Val   - mIoU: 0.8427, F1: 0.9126, OA: 0.9349
+
+Epoch  32/100
+  Train - mIoU: 0.8330, F1: 0.9073, OA: 0.9256
+  Val   - mIoU: 0.8437, F1: 0.9131, OA: 0.9350
+
+Epoch  33/100
+  Train - mIoU: 0.8285, F1: 0.9044, OA: 0.9238
+  Val   - mIoU: 0.8395, F1: 0.9106, OA: 0.9333
+
+Epoch  34/100
+  Train - mIoU: 0.8348, F1: 0.9084, OA: 0.9258
+  Val   - mIoU: 0.8437, F1: 0.9132, OA: 0.9354
+
+Epoch  35/100
+  Train - mIoU: 0.8328, F1: 0.9071, OA: 0.9258
+  Val   - mIoU: 0.8431, F1: 0.9128, OA: 0.9353
+
+Epoch  36/100
+  Train - mIoU: 0.8320, F1: 0.9065, OA: 0.9259
+  Val   - mIoU: 0.8427, F1: 0.9125, OA: 0.9349
+
+Epoch  37/100
+  Train - mIoU: 0.8318, F1: 0.9065, OA: 0.9248
+  Val   - mIoU: 0.8418, F1: 0.9120, OA: 0.9344
+
+Epoch  38/100
+  Train - mIoU: 0.8328, F1: 0.9070, OA: 0.9260
+  Val   - mIoU: 0.8425, F1: 0.9123, OA: 0.9351
+
+Epoch  39/100
+  Train - mIoU: 0.8346, F1: 0.9082, OA: 0.9264
+  Val   - mIoU: 0.8445, F1: 0.9136, OA: 0.9353
+
+Epoch  40/100
+  Train - mIoU: 0.8368, F1: 0.9095, OA: 0.9275
+  Val   - mIoU: 0.8431, F1: 0.9128, OA: 0.9349
+
+Epoch  41/100
+  Train - mIoU: 0.8409, F1: 0.9120, OA: 0.9297
+  Val   - mIoU: 0.8426, F1: 0.9124, OA: 0.9347
+
+Epoch  42/100
+  Train - mIoU: 0.8381, F1: 0.9103, OA: 0.9289
+  Val   - mIoU: 0.8437, F1: 0.9131, OA: 0.9350
+
+Epoch  43/100
+  Train - mIoU: 0.8362, F1: 0.9092, OA: 0.9272
+  Val   - mIoU: 0.8427, F1: 0.9125, OA: 0.9345
+
+Epoch  44/100
+  Train - mIoU: 0.8411, F1: 0.9122, OA: 0.9304
+  Val   - mIoU: 0.8431, F1: 0.9127, OA: 0.9350
+
+Epoch  45/100
+  Train - mIoU: 0.8255, F1: 0.9025, OA: 0.9212
+  Val   - mIoU: 0.8304, F1: 0.9047, OA: 0.9282
+
+Epoch  46/100
+  Train - mIoU: 0.8198, F1: 0.8988, OA: 0.9214
+  Val   - mIoU: 0.8405, F1: 0.9112, OA: 0.9318
+
+Epoch  47/100
+  Train - mIoU: 0.8260, F1: 0.9028, OA: 0.9225
+  Val   - mIoU: 0.8392, F1: 0.9105, OA: 0.9330
+
+Epoch  48/100
+  Train - mIoU: 0.8273, F1: 0.9037, OA: 0.9219
+  Val   - mIoU: 0.8429, F1: 0.9127, OA: 0.9340
+
+Epoch  49/100
+  Train - mIoU: 0.8258, F1: 0.9026, OA: 0.9233
+  Val   - mIoU: 0.8267, F1: 0.9021, OA: 0.9280
+  >>> Checkpoint saved at epoch 49
+
+Epoch  50/100
+  Train - mIoU: 0.8312, F1: 0.9061, OA: 0.9247
+  Val   - mIoU: 0.8412, F1: 0.9116, OA: 0.9334
+
+Epoch  51/100
+  Train - mIoU: 0.8326, F1: 0.9070, OA: 0.9245
+  Val   - mIoU: 0.8370, F1: 0.9090, OA: 0.9313
+
+Epoch  52/100
+  Train - mIoU: 0.8341, F1: 0.9079, OA: 0.9256
+  Val   - mIoU: 0.8396, F1: 0.9106, OA: 0.9330
+
+Epoch  53/100
+  Train - mIoU: 0.8378, F1: 0.9102, OA: 0.9281
+  Val   - mIoU: 0.8359, F1: 0.9082, OA: 0.9334
+
+Epoch  54/100
+  Train - mIoU: 0.8407, F1: 0.9119, OA: 0.9296
+  Val   - mIoU: 0.8416, F1: 0.9120, OA: 0.9329
+
+Epoch  55/100
+  Train - mIoU: 0.8396, F1: 0.9112, OA: 0.9296
+  Val   - mIoU: 0.8420, F1: 0.9120, OA: 0.9333
+
+Epoch  56/100
+  Train - mIoU: 0.8434, F1: 0.9135, OA: 0.9321
+  Val   - mIoU: 0.8447, F1: 0.9137, OA: 0.9346
+
+Epoch  57/100
+  Train - mIoU: 0.8383, F1: 0.9102, OA: 0.9311
+  Val   - mIoU: 0.8410, F1: 0.9115, OA: 0.9338
+
+Epoch  58/100
+  Train - mIoU: 0.8459, F1: 0.9151, OA: 0.9328
+  Val   - mIoU: 0.8427, F1: 0.9126, OA: 0.9337
+
+Epoch  59/100
+  Train - mIoU: 0.8453, F1: 0.9147, OA: 0.9319
+  Val   - mIoU: 0.8384, F1: 0.9098, OA: 0.9331
+
+Epoch  60/100
+  Train - mIoU: 0.8461, F1: 0.9152, OA: 0.9320
+  Val   - mIoU: 0.8425, F1: 0.9125, OA: 0.9341
+
+Epoch  61/100
+  Train - mIoU: 0.8471, F1: 0.9159, OA: 0.9323
+  Val   - mIoU: 0.8415, F1: 0.9117, OA: 0.9339
+
+Epoch  62/100
+  Train - mIoU: 0.8489, F1: 0.9169, OA: 0.9342
+  Val   - mIoU: 0.8401, F1: 0.9107, OA: 0.9328
+
+Epoch  63/100
+  Train - mIoU: 0.8509, F1: 0.9180, OA: 0.9357
+  Val   - mIoU: 0.8400, F1: 0.9109, OA: 0.9331
+
+Epoch  64/100
+  Train - mIoU: 0.8522, F1: 0.9188, OA: 0.9362
+  Val   - mIoU: 0.8420, F1: 0.9120, OA: 0.9337
+
+Epoch  65/100
+  Train - mIoU: 0.8551, F1: 0.9206, OA: 0.9379
+  Val   - mIoU: 0.8462, F1: 0.9147, OA: 0.9361
+
+Epoch  66/100
+  Train - mIoU: 0.8549, F1: 0.9205, OA: 0.9369
+  Val   - mIoU: 0.8412, F1: 0.9116, OA: 0.9338
+
+Epoch  67/100
+  Train - mIoU: 0.8521, F1: 0.9188, OA: 0.9356
+  Val   - mIoU: 0.8432, F1: 0.9129, OA: 0.9350
+
+Epoch  68/100
+  Train - mIoU: 0.8609, F1: 0.9241, OA: 0.9393
+  Val   - mIoU: 0.8414, F1: 0.9118, OA: 0.9329
+
+Epoch  69/100
+  Train - mIoU: 0.8570, F1: 0.9217, OA: 0.9383
+  Val   - mIoU: 0.8393, F1: 0.9104, OA: 0.9320
+
+Epoch  70/100
+  Train - mIoU: 0.8597, F1: 0.9234, OA: 0.9398
+  Val   - mIoU: 0.8442, F1: 0.9134, OA: 0.9346
+
+Epoch  71/100
+  Train - mIoU: 0.8569, F1: 0.9218, OA: 0.9377
+  Val   - mIoU: 0.8430, F1: 0.9126, OA: 0.9345
+
+Epoch  72/100
+  Train - mIoU: 0.8611, F1: 0.9242, OA: 0.9408
+  Val   - mIoU: 0.8447, F1: 0.9137, OA: 0.9345
+
+Epoch  73/100
+  Train - mIoU: 0.8595, F1: 0.9233, OA: 0.9397
+  Val   - mIoU: 0.8354, F1: 0.9078, OA: 0.9303
+
+Epoch  74/100
+  Train - mIoU: 0.8580, F1: 0.9223, OA: 0.9395
+  Val   - mIoU: 0.8403, F1: 0.9110, OA: 0.9330
+  >>> Checkpoint saved at epoch 74
+
+Epoch  75/100
+  Train - mIoU: 0.8639, F1: 0.9260, OA: 0.9402
+  Val   - mIoU: 0.8453, F1: 0.9141, OA: 0.9346
+
+Epoch  76/100
+  Train - mIoU: 0.8642, F1: 0.9261, OA: 0.9408
+  Val   - mIoU: 0.8445, F1: 0.9135, OA: 0.9344
+
+Epoch  77/100
+  Train - mIoU: 0.8636, F1: 0.9257, OA: 0.9412
+  Val   - mIoU: 0.8404, F1: 0.9110, OA: 0.9325
+
+Epoch  78/100
+  Train - mIoU: 0.8638, F1: 0.9258, OA: 0.9411
+  Val   - mIoU: 0.8444, F1: 0.9136, OA: 0.9342
+
+Epoch  79/100
+  Train - mIoU: 0.8638, F1: 0.9258, OA: 0.9418
+  Val   - mIoU: 0.8464, F1: 0.9148, OA: 0.9355
+
+Epoch  80/100
+  Train - mIoU: 0.8664, F1: 0.9273, OA: 0.9429
+  Val   - mIoU: 0.8425, F1: 0.9123, OA: 0.9343
+
+Epoch  81/100
+  Train - mIoU: 0.8707, F1: 0.9299, OA: 0.9447
+  Val   - mIoU: 0.8443, F1: 0.9134, OA: 0.9345
+
+Epoch  82/100
+  Train - mIoU: 0.8671, F1: 0.9278, OA: 0.9431
+  Val   - mIoU: 0.8455, F1: 0.9142, OA: 0.9350
+
+Epoch  83/100
+  Train - mIoU: 0.8711, F1: 0.9302, OA: 0.9440
+  Val   - mIoU: 0.8425, F1: 0.9123, OA: 0.9340
+
+Epoch  84/100
+  Train - mIoU: 0.8690, F1: 0.9289, OA: 0.9438
+  Val   - mIoU: 0.8427, F1: 0.9124, OA: 0.9338
+
+Epoch  85/100
+  Train - mIoU: 0.8710, F1: 0.9300, OA: 0.9451
+  Val   - mIoU: 0.8431, F1: 0.9127, OA: 0.9339
+
+Epoch  86/100
+  Train - mIoU: 0.8703, F1: 0.9296, OA: 0.9445
+  Val   - mIoU: 0.8438, F1: 0.9132, OA: 0.9336
+
+Epoch  87/100
+  Train - mIoU: 0.8733, F1: 0.9314, OA: 0.9465
+  Val   - mIoU: 0.8430, F1: 0.9126, OA: 0.9345
+
+Epoch  88/100
+  Train - mIoU: 0.8718, F1: 0.9305, OA: 0.9459
+  Val   - mIoU: 0.8446, F1: 0.9136, OA: 0.9349
+
+Epoch  89/100
+  Train - mIoU: 0.8757, F1: 0.9328, OA: 0.9471
+  Val   - mIoU: 0.8443, F1: 0.9135, OA: 0.9346
+
+Epoch  90/100
+  Train - mIoU: 0.8730, F1: 0.9312, OA: 0.9460
+  Val   - mIoU: 0.8450, F1: 0.9139, OA: 0.9345
+
+Epoch  91/100
+  Train - mIoU: 0.8733, F1: 0.9314, OA: 0.9470
+  Val   - mIoU: 0.8460, F1: 0.9145, OA: 0.9350
+
+Epoch  92/100
+  Train - mIoU: 0.8745, F1: 0.9321, OA: 0.9461
+  Val   - mIoU: 0.8459, F1: 0.9144, OA: 0.9353
+
+Epoch  93/100
+  Train - mIoU: 0.8763, F1: 0.9332, OA: 0.9474
+  Val   - mIoU: 0.8457, F1: 0.9143, OA: 0.9351
+
+Epoch  94/100
+  Train - mIoU: 0.8736, F1: 0.9316, OA: 0.9469
+  Val   - mIoU: 0.8456, F1: 0.9143, OA: 0.9351
+
+Epoch  95/100
+  Train - mIoU: 0.8741, F1: 0.9318, OA: 0.9467
+  Val   - mIoU: 0.8453, F1: 0.9141, OA: 0.9350
+
+Epoch  96/100
+  Train - mIoU: 0.8753, F1: 0.9326, OA: 0.9461
+  Val   - mIoU: 0.8455, F1: 0.9142, OA: 0.9351
+
+Epoch  97/100
+  Train - mIoU: 0.8745, F1: 0.9321, OA: 0.9473
+  Val   - mIoU: 0.8443, F1: 0.9134, OA: 0.9346
+
+Epoch  98/100
+  Train - mIoU: 0.8758, F1: 0.9329, OA: 0.9473
+  Val   - mIoU: 0.8452, F1: 0.9140, OA: 0.9350
+
+Epoch  99/100
+  Train - mIoU: 0.8733, F1: 0.9314, OA: 0.9465
+  Val   - mIoU: 0.8452, F1: 0.9140, OA: 0.9349
+  >>> Checkpoint saved at epoch 99
+
+================================================================================
+Training Summary:
+================================================================================
+
+Best Validation mIoU: 0.8464 (Epoch 79)
+Best Validation F1:   0.9148 (Epoch 79)
+Best Validation OA:   0.9361 (Epoch 65)
+
+Final Epoch (99) Results:
+  Validation - mIoU: 0.8452, F1: 0.9140, OA: 0.9349
+
+Convergence Analysis:
+  First 20 epochs avg mIoU: 0.8036
+  Last 20 epochs avg mIoU:  0.8445
+  Improvement: 0.0409 (5.09%)
+
+================================================================================
+Training Completed Successfully
+================================================================================
