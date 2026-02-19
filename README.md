@@ -19,8 +19,8 @@ pip install -r requirements.txt
 ## Dataset
 
 Download links:
-- **ISPRS Vaihingen 2D Semantic Labeling**: https://www.isprs.org/resources/datasets/benchmarks/UrbanSemLab/2d-sem-label-vaihingen.aspx
-- **ISPRS Potsdam 2D Semantic Labeling**: https://www.isprs.org/resources/datasets/benchmarks/UrbanSemLab/2d-sem-label-potsdam.aspx
+- **ISPRS Vaihingen**: https://www.isprs.org/resources/datasets/benchmarks/UrbanSemLab/2d-sem-label-vaihingen.aspx
+- **ISPRS Potsdam**: https://www.isprs.org/resources/datasets/benchmarks/UrbanSemLab/2d-sem-label-potsdam.aspx
 - **LoveDA**: https://codalab.lisn.upsaclay.fr/competitions/421
 
 
